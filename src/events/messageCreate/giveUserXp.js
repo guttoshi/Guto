@@ -35,17 +35,18 @@ module.exports = async (client, message) => {
             level.xp = 0;
             level.level += 1;
 
-            message.channel.send(`${message.member} você upou de nível! Seu nível atual agora é **${level.level}**!`);
+            message.channel.send(`${message.member} Você upou de nível! Seu nível atual agora é **${level.level}**!`);
          }
 
          await level.save().catch((e) => {
             console.log(`Error saving update level ${e}`);
             return;
          });
+
          cooldowns.add(message.author.id);
          setTimeout(() => {
             cooldowns.delete(message.author.id);
-         }, 60000);
+         }, 1500);
       } else {
          const newLevel = new Level({
             userId: message.author.id,

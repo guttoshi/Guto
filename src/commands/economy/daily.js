@@ -12,7 +12,7 @@ module.exports = {
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
       interaction.reply({
-        content: 'You can only run this command inside a server.',
+        content: 'Você só pode usar comando em um server, bobinho.',
         ephemeral: true,
       });
       return;
@@ -47,13 +47,13 @@ module.exports = {
         });
       }
 
-      const dailyAmount = Math.random(1000, 5000);
+      const dailyAmount = Math.floor(Math.random() * 5000);
 
       user.balance += dailyAmount;
       await user.save();
 
       interaction.editReply(
-        `${dailyAmount} foi adicionado em sua conta. Sua nova quantia é ${user.balance}`
+        `${dailyAmount} foi adicionado em sua conta. Sua nova quantia é de ${user.balance} Dabloon(s).`
       );
     } catch (error) {
       console.log(`Error with /daily: ${error}`);

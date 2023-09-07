@@ -31,7 +31,7 @@ module.exports = {
     interaction.editReply(
       targetUserId === interaction.member.id
         ? `Sua conta atualmente é **${user.balance}**.`
-        : `Na conta do(a) ${targetUserId} há **${user.balance}**.`
+        : `Na conta do(a) ${(await interaction.guild.members.fetch(targetUserId)).user.globalName} há **${user.balance}** Dabloon(s).`
     );
   },
 
