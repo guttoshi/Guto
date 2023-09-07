@@ -7,16 +7,12 @@ const userSchema = new Schema({
   },
   guildId: {
     type: String,
-    required: true,
+    required: true
   },
-  balance: {
-    type: Number,
-    default: 0,
-  },
-  lastDaily: {
-    type: Date,
+  banned: {
+    type: Boolean,
     required: true,
   },
 });
 
-module.exports = model('User', userSchema);
+module.exports = model('Banned', userSchema);

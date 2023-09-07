@@ -29,7 +29,7 @@ module.exports = {
       const requestUserRolePosition = interaction.member.roles.highest.position; // Highest role of the user running the command
       const botRolePosition = interaction.guild.members.me.roles.highest.position; // Highest role of the bot
    
-      if (targetUserRolePosition >= requestUserRolePosition) {
+      if (targetUserRolePosition > requestUserRolePosition) {
          await interaction.editReply("Você não pode remover essa pessoa porque ela tem um cargo maior/igual ao seu.");
          return;
       }
