@@ -3,24 +3,25 @@ const User = require('../../models/User');
 
 module.exports = {
   name: 'daily',
-  description: "Resgate sua recompensa diária!",
-
+  description: 'Colete suas diárias!',
   /**
-   * 
-   * @param {Client} client 
-   * @param {Interaction} interaction 
+   *
+   * @param {Client} client
+   * @param {Interaction} interaction
    */
-
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply({ content: "Você só pode usar esse comando em um servidor!", ephemeral: true });
+      interaction.reply({
+        content: 'You can only run this command inside a server.',
+        ephemeral: true,
+      });
       return;
     }
 
     try {
       await interaction.deferReply();
 
-      let query = {
+      const query = {
         userId: interaction.member.id,
         guildId: interaction.guild.id,
       };
@@ -32,24 +33,30 @@ module.exports = {
         const currentDate = new Date().toDateString();
 
         if (lastDailyDate === currentDate) {
-          interaction.editReply("Você já coletou sua recompensa diária hoje. Tente novamente mais tarde!")
+          interaction.editReply(
+            'Você já coletou sua recompensa diária! Tente novamente mais tarde.'
+          );
           return;
-        } else {
-          user = new User({
-            ...query,
-            lastDaily: new Date(),
-          });
         }
+        
+        user.lastDaily = new Date();
+      } else {
+        user = new User({
+          ...query,
+          lastDaily: new Date(),
+        });
+      }
 
-        const dailyAmount = Math.random(1000, 5000);
+      const dailyAmount = Math.random(1000, 5000);
 
-        user.balance += dailyAmount;
-        await user.save();
+      user.balance += dailyAmount;
+      await user.save();
 
-        interaction.editReply(`${dailyAmount} foi adicionado em sua conta! Sua nova quantia é ${user.balance}`);
-      };
+      interaction.editReply(
+        `${dailyAmount} foi adicionado em sua conta. Sua nova quantia é ${user.balance}`
+      );
     } catch (error) {
-      console.log(`Error with daily ${error}`);
+      console.log(`Error with /daily: ${error}`);
     }
   },
-}
+};  

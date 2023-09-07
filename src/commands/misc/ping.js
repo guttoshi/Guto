@@ -1,6 +1,6 @@
 module.exports = {
    name: 'ping',
-   description: 'Replies with the bot ping!',
+   description: 'Responde com o ping do bot!',
    // devOnly: Boolean,
    // testOnly: Boolean,
    // options: Object[],
