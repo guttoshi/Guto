@@ -1,6 +1,7 @@
-require('dotenv').config()
-const { Client, IntentsBitField } = require("discord.js")
-const eventhandler = require('./handlers/eventhandler')
+require('dotenv').config();
+const { Client, IntentsBitField } = require("discord.js");
+const { default: mongoose } = require('mongoose');
+const eventhandler = require('./handlers/eventhandler');
 
 const client = new Client({
     intents: [
@@ -11,6 +12,6 @@ const client = new Client({
     ],
 });
 
-eventhandler(client)
+eventhandler(client);
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);

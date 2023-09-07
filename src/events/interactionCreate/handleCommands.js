@@ -16,7 +16,7 @@ module.exports = async (client, interaction) => {
       if (commandObject.devOnly) {
          if (!devs.includes(interaction.member.id)) {
             interaction.reply({
-               content: 'Only developers are allowed to run this command.',
+               content: 'Somente desenvolvedores consegue usar esse comando.',
                ephemeral: true,
             });
             
@@ -27,7 +27,7 @@ module.exports = async (client, interaction) => {
       if (commandObject.testOnly) {
          if (!(interaction.guild.id === testServer)) {
             interaction.reply({
-               content: 'This command cannot be ran here.',
+               content: 'Esse comando não pode ser usado aqui.',
                ephemeral: true,
             });
             
@@ -39,7 +39,7 @@ module.exports = async (client, interaction) => {
          for (const permission of commandObject.permissionsRequired) {
             if (!interaction.member.permissions.has(permission)) {
                interaction.reply({
-                  content: 'Not enough permissions.',
+                  content: 'Você não tem permissões suficiente.',
                   ephemeral: true,
                });
 
@@ -54,7 +54,7 @@ module.exports = async (client, interaction) => {
 
             if (!bot.permissions.has(permission)) {
                interaction.reply({
-                  content: "i don't have enough permissions.",
+                  content: "Eu não tenho permissões suficiente.",
                   ephemeral: true,
                });
 
