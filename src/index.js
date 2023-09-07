@@ -8,10 +8,20 @@ const client = new Client({
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.GuildPresences,
         IntentsBitField.Flags.MessageContent,
     ],
 });
 
-eventhandler(client);
+(async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("Connected to DB.");
 
-client.login(process.env.TOKEN);
+        eventhandler(client);
+
+        client.login(process.env.TOKEN);
+    } catch (error) {
+        console.log(`Error ${error}`)
+    }
+})();
